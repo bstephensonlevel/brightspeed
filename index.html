@@ -321,6 +321,105 @@
       display: block;
     }
 
+    /* ===== SMALL VIDEO GALLERY ===== */
+    .culture-gallery {
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 4rem;
+    }
+
+    .culture-gallery-header {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .slider-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .slider-item {
+      flex: 0 0 calc(33.333% - 14px);
+      min-width: 0;
+    }
+
+    @media (max-width: 768px) {
+      .slider-item {
+        flex: 0 0 calc(100% - 20px);
+      }
+    }
+
+    .slider-item .video-wrapper {
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .slider-item .video-play-btn {
+      width: 48px;
+      height: 48px;
+    }
+
+    .slider-item .video-play-btn svg {
+      width: 20px;
+      height: 20px;
+      margin-left: 3px;
+    }
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .slider-arrow:hover {
+      background: var(--color-blue);
+      border-color: var(--color-blue);
+      color: var(--color-black);
+    }
+
+    .slider-arrow svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .slider-prev {
+      left: -10px;
+    }
+
+    .slider-next {
+      right: -10px;
+    }
+
     /* ===== PLACEMAT SECTION ===== */
     .placemat {
       padding: 5rem 2rem 4rem;
@@ -946,6 +1045,24 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
+    .lightbox-overlay iframe {
+      width: 90%;
+      height: 80vh;
+      max-width: 1000px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    .lightbox-overlay.video img {
+      display: none;
+    }
+
+    .lightbox-overlay.video iframe {
+      display: block;
+    }
+
     .hero-logo {
       width: 100px;
     }
@@ -1055,6 +1172,114 @@
         </div>
         <div class="video-iframe-container">
           <iframe id="cultureVideoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="culture-gallery">
+        <h3 class="culture-gallery-header">Hear from more of the Brightspeed team</h3>
+        <div class="slider-container">
+          <div class="slider-arrow slider-prev">
+            <svg viewBox="0 0 24 24">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </div>
+
+          <div class="slider-track" id="videoSliderTrack">
+            <!-- Video 1 -->
+            <div class="slider-item">
+              <div class="video-wrapper cultureSliderVideo"
+                data-video-url="https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0">
+                <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+                  alt="Culture video thumbnail" />
+                <div class="video-thumbnail-overlay"></div>
+                <div class="video-play-btn">
+                  <svg viewBox="0 0 24 24">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="slider-item">
+              <div class="video-wrapper cultureSliderVideo"
+                data-video-url="https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0">
+                <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+                  alt="Culture video thumbnail" />
+                <div class="video-thumbnail-overlay"></div>
+                <div class="video-play-btn">
+                  <svg viewBox="0 0 24 24">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="slider-item">
+              <div class="video-wrapper cultureSliderVideo"
+                data-video-url="https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0">
+                <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+                  alt="Culture video thumbnail" />
+                <div class="video-thumbnail-overlay"></div>
+                <div class="video-play-btn">
+                  <svg viewBox="0 0 24 24">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="slider-item">
+              <div class="video-wrapper cultureSliderVideo"
+                data-video-url="https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0">
+                <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+                  alt="Culture video thumbnail" />
+                <div class="video-thumbnail-overlay"></div>
+                <div class="video-play-btn">
+                  <svg viewBox="0 0 24 24">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 5 -->
+            <div class="slider-item">
+              <div class="video-wrapper cultureSliderVideo"
+                data-video-url="https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0">
+                <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+                  alt="Culture video thumbnail" />
+                <div class="video-thumbnail-overlay"></div>
+                <div class="video-play-btn">
+                  <svg viewBox="0 0 24 24">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video 6 -->
+            <div class="slider-item">
+              <div class="video-wrapper cultureSliderVideo"
+                data-video-url="https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0">
+                <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+                  alt="Culture video thumbnail" />
+                <div class="video-thumbnail-overlay"></div>
+                <div class="video-play-btn">
+                  <svg viewBox="0 0 24 24">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-arrow slider-next">
+            <svg viewBox="0 0 24 24">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -1245,9 +1470,10 @@
   </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
     <img id="lightbox-img" src="" alt="">
+    <iframe id="lightbox-video" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -1285,7 +1511,7 @@
         observer.observe(el);
       });
 
-      // Video player
+      // Main Culture Video player
       const cultureVideo = document.getElementById('cultureVideo');
       if (cultureVideo) {
         cultureVideo.addEventListener('click', function () {
@@ -1293,6 +1519,29 @@
           // Add autoplay to URL and show iframe
           iframe.src = 'https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0';
           this.classList.add('playing');
+        });
+      }
+
+      // Small Slider Videos
+      const sliderVideos = document.querySelectorAll('.cultureSliderVideo');
+      sliderVideos.forEach(video => {
+        video.addEventListener('click', function () {
+          openVideoLightbox(this.dataset.videoUrl);
+        });
+      });
+
+      // Slider Navigation
+      const track = document.getElementById('videoSliderTrack');
+      const btnPrev = document.querySelector('.slider-prev');
+      const btnNext = document.querySelector('.slider-next');
+
+      if (track && btnPrev && btnNext) {
+        btnPrev.addEventListener('click', () => {
+          track.scrollBy({ left: -(track.clientWidth + 20), behavior: 'smooth' });
+        });
+
+        btnNext.addEventListener('click', () => {
+          track.scrollBy({ left: track.clientWidth + 20, behavior: 'smooth' });
         });
       }
     });
@@ -1305,8 +1554,24 @@
       document.body.style.overflow = 'hidden';
     }
 
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
+    function openVideoLightbox(videoUrl) {
+      document.getElementById('lightbox-video').src = videoUrl;
+      document.getElementById('lightbox').classList.add('active', 'video');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) {
+        return;
+      }
+
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('active', 'video');
+      document.getElementById('lightbox-img').src = '';
+      const videoIframe = document.getElementById('lightbox-video');
+      if (videoIframe) {
+        videoIframe.src = '';
+      }
       document.body.style.overflow = '';
     }
   </script>
