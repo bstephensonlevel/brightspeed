@@ -190,6 +190,137 @@
       border-radius: 2px;
     }
 
+    /* ===== VIDEO SECTION ===== */
+    .culture-video {
+      padding: 5rem 2rem;
+      background: var(--color-black);
+      color: var(--color-white);
+      text-align: center;
+    }
+
+    .culture-video-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .culture-video-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-blue);
+      margin-bottom: 1rem;
+    }
+
+    .culture-video-inner h2 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .culture-video-inner p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #000;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-wrapper::before {
+      content: '';
+      display: block;
+      padding-top: 56.25%;
+      /* 16:9 */
+    }
+
+    .video-thumbnail {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-thumbnail-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease;
+    }
+
+    .video-wrapper:hover .video-thumbnail-overlay {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease, background 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-play-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--color-black);
+      margin-left: 4px;
+      /* optical center for triangle */
+    }
+
+    .video-wrapper:hover .video-play-btn {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: var(--color-blue);
+    }
+
+    .video-wrapper:hover .video-play-btn svg {
+      fill: var(--color-black);
+    }
+
+    .video-iframe-container {
+      display: none;
+      position: absolute;
+      inset: 0;
+    }
+
+    .video-iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-wrapper.playing .video-thumbnail,
+    .video-wrapper.playing .video-thumbnail-overlay,
+    .video-wrapper.playing .video-play-btn {
+      display: none;
+    }
+
+    .video-wrapper.playing .video-iframe-container {
+      display: block;
+    }
+
     /* ===== PLACEMAT SECTION ===== */
     .placemat {
       padding: 5rem 2rem 4rem;
@@ -906,6 +1037,29 @@
     </div>
   </section>
 
+  <!-- ===== CULTURE VIDEO ===== -->
+  <section class="culture-video">
+    <div class="culture-video-inner reveal">
+      <div class="culture-video-eyebrow">GOOD ENOUGH ISN'T</div>
+      <h2>Get to know our culture.</h2>
+      <p>Watch as our team shares their excitement about the opportunity to work with Brightspeed and how we'll put our
+        "Good Enough Isn't" ethos work for you.</p>
+      <div class="video-wrapper" id="cultureVideo">
+        <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+          alt="Culture video thumbnail" />
+        <div class="video-thumbnail-overlay"></div>
+        <div class="video-play-btn">
+          <svg viewBox="0 0 24 24">
+            <polygon points="8,5 19,12 8,19" />
+          </svg>
+        </div>
+        <div class="video-iframe-container">
+          <iframe id="cultureVideoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== PLACEMAT ===== -->
   <section class="placemat">
     <div class="placemat-inner reveal">
@@ -1100,28 +1254,47 @@
   <script>
     // QR Code generation
     document.addEventListener('DOMContentLoaded', function () {
-      new QRCode(document.getElementById("qr-swag"), {
-        text: "https://levelagency.com/swag",
-        width: 160,
-        height: 160,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.M
-      });
-    });
-
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+      // QR Code generation
+      try {
+        const qrElement = document.getElementById("qr-swag");
+        if (qrElement) {
+          new QRCode(qrElement, {
+            text: "https://levelagency.com/swag",
+            width: 160,
+            height: 160,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+          });
         }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      } catch (e) {
+        console.warn("QR Code generation failed:", e);
+      }
 
-    document.querySelectorAll('.reveal').forEach(el => {
-      el.classList.add('hidden');
-      observer.observe(el);
+      // Scroll reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('hidden');
+        observer.observe(el);
+      });
+
+      // Video player
+      const cultureVideo = document.getElementById('cultureVideo');
+      if (cultureVideo) {
+        cultureVideo.addEventListener('click', function () {
+          const iframe = this.querySelector('iframe');
+          // Add autoplay to URL and show iframe
+          iframe.src = 'https://www.youtube.com/embed/9nQtgj1YfKA?autoplay=1&mute=0&rel=0&showinfo=0';
+          this.classList.add('playing');
+        });
+      }
     });
 
     // Lightbox
@@ -1133,4 +1306,10 @@
     }
 
     function closeLightbox() {
-  
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+
+</html>
