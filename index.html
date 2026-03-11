@@ -851,11 +851,6 @@
         grid-template-columns: 1fr;
         gap: 3rem;
       }
-
-      .cta-block {
-        height: auto;
-        padding-bottom: 1.5rem;
-      }
     }
 
     .cta-block {
@@ -865,6 +860,17 @@
       padding: 2.5rem;
       text-align: center;
       height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .cta-block {
+        height: auto;
+        padding: 2.5rem 1.5rem;
+      }
     }
 
     .cta-block h3 {
@@ -1158,7 +1164,7 @@
         <p>Visit our swag store to choose a gift from
           Level.</p>
         <a href="https://gifts.ongoody.com/retrieve/level-agency-b9fuodjdxpxi55ov" class="cta-btn accent"
-          target="_blank" rel="noopener">Get your swag</a><br /><br /><br /><br />
+          target="_blank" rel="noopener">Get your swag</a>
       </div>
     </div>
   </section>
