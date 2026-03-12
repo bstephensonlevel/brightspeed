@@ -286,8 +286,6 @@
       width: 28px;
       height: 28px;
       fill: var(--color-black);
-      margin-left: 4px;
-      /* optical center for triangle */
     }
 
     .video-wrapper:hover .video-play-btn {
@@ -347,8 +345,16 @@
     .slider-track {
       display: flex;
       gap: 20px;
-      overflow-x: hidden;
+      overflow-x: auto;
       scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .slider-track::-webkit-scrollbar {
+      display: none;
+      /* Safari and Chrome */
     }
 
     .slider-item {
@@ -358,7 +364,8 @@
 
     @media (max-width: 768px) {
       .slider-item {
-        flex: 0 0 calc(100% - 20px);
+        flex: 0 0 100%;
+        scroll-snap-align: center;
       }
     }
 
@@ -375,7 +382,6 @@
     .slider-item .video-play-btn svg {
       width: 20px;
       height: 20px;
-      margin-left: 3px;
     }
 
     .slider-arrow {
@@ -1314,7 +1320,7 @@
         <div class="video-thumbnail-overlay"></div>
         <div class="video-play-btn">
           <svg viewBox="0 0 24 24">
-            <polygon points="8,5 19,12 8,19" />
+            <polygon points="9,5 19,12 9,19" />
           </svg>
         </div>
         <div class="video-iframe-container">
