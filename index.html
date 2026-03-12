@@ -472,20 +472,26 @@
     }
 
     .placemat-preview {
-      width: 180px;
-      height: 230px;
+      width: 100%;
+      max-width: 400px;
       margin: 0 auto 2.5rem;
-      background: var(--color-light-bg);
+      background: #fff;
       border: 1px solid var(--color-gray);
       border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .placemat-preview img {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: contain;
+      display: block;
     }
 
     .placemat-preview::before {
@@ -499,42 +505,7 @@
       border-radius: 12px 12px 0 0;
     }
 
-    .placemat-preview-icon {
-      width: 40px;
-      height: 40px;
-      color: var(--color-muted);
-      opacity: 0.5;
-    }
 
-    .placemat-preview-lines {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      width: 100px;
-    }
-
-    .placemat-preview-lines span {
-      display: block;
-      height: 6px;
-      border-radius: 3px;
-      background: var(--color-gray);
-    }
-
-    .placemat-preview-lines span:first-child {
-      width: 100%;
-    }
-
-    .placemat-preview-lines span:nth-child(2) {
-      width: 80%;
-    }
-
-    .placemat-preview-lines span:nth-child(3) {
-      width: 90%;
-    }
-
-    .placemat-preview-lines span:nth-child(4) {
-      width: 65%;
-    }
 
     /* ===== TOPIC HIGHLIGHTS ===== */
     .topics {
@@ -1235,54 +1206,184 @@
       cursor: pointer;
       line-height: 1;
     }
+
+    /* ===== LOGIN OVERLAY ===== */
+    #login-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--color-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-logo {
+      width: 60px;
+      margin: 0 auto 2rem;
+    }
+
+    .login-box h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .login-box p {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .login-input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: var(--color-blue);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .login-btn {
+      background: var(--color-blue);
+      color: var(--color-black);
+      border: none;
+      border-radius: 10px;
+      padding: 0.8rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 0.5rem;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(134, 213, 244, 0.3);
+    }
+
+    .login-error {
+      color: #ff4b4b;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-10px);
+      }
+
+      75% {
+        transform: translateX(10px);
+      }
+    }
   </style>
 </head>
 
 <body>
+  <div id="login-overlay">
+    <div class="login-box">
+      <div class="login-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#86D5F4" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h1>Private Access</h1>
+      <p>Enter password to view the Brightspeed Growth Engine Pitch Follow-up.</p>
+      <form class="login-form" id="login-form">
+        <input type="password" id="password" class="login-input" placeholder="Password" required
+          autocomplete="current-password">
+        <button type="submit" class="login-btn">Secure Login</button>
+        <div id="login-error" class="login-error">Invalid password.</div>
+      </form>
+    </div>
+  </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <div class="hero-logo">
-        <!--<svg viewBox="0 0 1088.59 200.05" xmlns="http://www.w3.org/2000/svg">
+  <div id="site-wrapper" style="display: none;">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-logo">
+          <!--<svg viewBox="0 0 1088.59 200.05" xmlns="http://www.w3.org/2000/svg">
           <path fill="#FFFFFF"
             d="M910.08,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM699.41,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM479.93,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h124.56c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-124.56ZM216.92,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM699.41,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM469.39,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h145.65c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-145.65ZM216.92,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM459.3,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h165.81c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-165.81ZM216.92,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM8.54,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h131.13c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-131.13ZM556.65,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM449.31,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM216.92,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h131.13c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-131.13ZM8.54,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM216.92,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM8.54,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM566.86,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM439.09,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM910.08,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM576.8,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM429.15,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM8.54,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM699.41,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM216.92,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM910.08,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM587.15,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM418.8,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM216.92,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,17.08C3.83,17.08,0,13.25,0,8.54S3.83,0,8.54,0h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54Z" />
         </svg>-->
-        <img class="hero-logo" src="https://www.level.agency/wp-content/uploads/2025/12/logo-primary.png" />
-      </div>
-      <div class="hero-eyebrow">From Level, for Brightspeed &bull; March 12, 2026</div>
-      <h1 class="hero-title">The growth engine Brightspeed deserves.</h1>
-      <!--<div class="hero-meta">
+          <img class="hero-logo" src="https://www.level.agency/wp-content/uploads/2025/12/logo-primary.png" />
+        </div>
+        <div class="hero-eyebrow">From Level, for Brightspeed &bull; March 12, 2026</div>
+        <h1 class="hero-title">The growth engine Brightspeed deserves.</h1>
+        <!--<div class="hero-meta">
         <strong>Electric Lemon at Equinox Hotel</strong><br>
         33 Hudson Yards, 24th Floor &bull; New York, NY
       </div>-->
-    </div>
-    <div class="hero-scroll">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
-        <path d="M12 5v14M19 12l-7 7-7-7" />
-      </svg>
-    </div>
-  </section>
+      </div>
+      <div class="hero-scroll">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
+      </div>
+    </section>
 
 
 
-  <!-- ===== THANK YOU ===== -->
-  <section class="thank-you">
-    <div class="thank-you-inner reveal">
-      <div class="accent-bar"></div>
-      <h2>Thank you for the opportunity.</h2>
-      <p>
-        We’ve gathered the materials from our presentation here, along with a few additional resources to give you a
-        clearer picture of how Level thinks, works, and partners with clients to drive meaningful growth.
-      </p>
-    </div>
-  </section>
+    <!-- ===== THANK YOU ===== -->
+    <section class="thank-you">
+      <div class="thank-you-inner reveal">
+        <div class="accent-bar"></div>
+        <h2>Thank you for the opportunity.</h2>
+        <p>
+          We’ve gathered the materials from our presentation here, along with a few additional resources to give you a
+          clearer picture of how Level thinks, works, and partners with clients to drive meaningful growth.
+        </p>
+      </div>
+    </section>
 
-  <!-- ===== SWAG + CTA ===== -->
-  <section class="cta-section">
-    <div class="cta-inner">
-      <!--<div class="cta-block reveal">
+    <!-- ===== SWAG + CTA ===== -->
+    <section class="cta-section">
+      <div class="cta-inner">
+        <!--<div class="cta-block reveal">
         <h3>Grab your swag.</h3>
         <p>Scan the QR code below to claim your exclusive Level event swag — our way of saying thanks.</p>
         <div class="qr-wrapper" id="qr-swag" style="display:flex;justify-content:center;">
@@ -1292,364 +1393,414 @@
         </div>
         <p class="swag-note">Scan with your phone camera</p>
       </div>-->
-      <div class="cta-block reveal">
-        <div class="cta-image">
-          <img src="brightspeed-cover.jpg" alt="Brightspeed Presentation Cover">
-        </div>
-        <div class="cta-content">
-          <h3>Download our presentation.</h3>
-          <p>Want to revisit the strategy and ideas we shared? Download the full Brightspeed presentation for a complete
-            look at our proposed approach.</p>
-          <a href="https://levelagency.chilipiper.com/round-robin/discovery-call" class="cta-btn accent" target="_blank"
-            rel="noopener">Download the deck</a>
+        <div class="cta-block reveal">
+          <div class="cta-image">
+            <img src="brightspeed-cover.jpg" alt="Brightspeed Presentation Cover">
+          </div>
+          <div class="cta-content">
+            <h3>Download our presentation.</h3>
+            <p>Want to revisit the strategy and ideas we shared? Download the full Brightspeed presentation for a
+              complete
+              look at our proposed approach.</p>
+            <a href="https://info.level.agency/hubfs/Blog%20assets/Brightspeed%20Final%20Presentation%20Deck.pdf"
+              class="cta-btn accent" target="_blank" rel="noopener">Download the deck</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CULTURE VIDEO ===== -->
-  <section class="culture-video">
-    <div class="culture-video-inner reveal">
-      <div class="culture-video-eyebrow">GOOD ENOUGH ISN'T</div>
-      <h2>Get to know our culture.</h2>
-      <p>Watch as our team shares their excitement about the opportunity to work with Brightspeed and how we'll put our
-        "Good Enough Isn't" ethos work for you.</p>
-      <div class="video-wrapper" id="cultureVideo">
-        <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
-          alt="Culture video thumbnail" />
-        <div class="video-thumbnail-overlay"></div>
-        <div class="video-play-btn">
-          <svg viewBox="0 0 24 24">
-            <polygon points="9,5 19,12 9,19" />
-          </svg>
-        </div>
-        <div class="video-iframe-container">
-          <iframe id="cultureVideoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="culture-gallery">
-        <h3 class="culture-gallery-header">Hear from more of the Brightspeed team</h3>
-        <div class="slider-container">
-          <div class="slider-arrow slider-prev">
+    <!-- ===== CULTURE VIDEO ===== -->
+    <section class="culture-video">
+      <div class="culture-video-inner reveal">
+        <div class="culture-video-eyebrow">GOOD ENOUGH ISN'T</div>
+        <h2>Get to know our culture.</h2>
+        <p>Watch as our team shares their excitement about how we'll put
+          our "Good Enough Isn't" ethos work for Brightspeed.</p>
+        <div class="video-wrapper" id="cultureVideo">
+          <img class="video-thumbnail" src="https://img.youtube.com/vi/9nQtgj1YfKA/maxresdefault.jpg"
+            alt="Culture video thumbnail" />
+          <div class="video-thumbnail-overlay"></div>
+          <div class="video-play-btn">
             <svg viewBox="0 0 24 24">
-              <polyline points="15 18 9 12 15 6"></polyline>
+              <polygon points="9,5 19,12 9,19" />
             </svg>
           </div>
-
-          <div class="slider-track" id="videoSliderTrack">
-            <!-- Video 1 -->
-            <div class="slider-item">
-              <div class="video-wrapper cultureSliderVideo"
-                data-video-url="https://www.youtube.com/embed/vHyYdDdt-YM?autoplay=1&mute=0&rel=0&showinfo=0">
-                <img class="video-thumbnail" src="https://img.youtube.com/vi/vHyYdDdt-YM/maxresdefault.jpg"
-                  alt="Culture video thumbnail" />
-                <div class="video-thumbnail-overlay"></div>
-                <div class="video-play-btn">
-                  <svg viewBox="0 0 24 24">
-                    <polygon points="8,5 19,12 8,19" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- Video 2 -->
-            <div class="slider-item">
-              <div class="video-wrapper cultureSliderVideo"
-                data-video-url="https://www.youtube.com/embed/0JWL67ha2hs?autoplay=1&mute=0&rel=0&showinfo=0">
-                <img class="video-thumbnail" src="https://img.youtube.com/vi/0JWL67ha2hs/maxresdefault.jpg"
-                  alt="Culture video thumbnail" />
-                <div class="video-thumbnail-overlay"></div>
-                <div class="video-play-btn">
-                  <svg viewBox="0 0 24 24">
-                    <polygon points="8,5 19,12 8,19" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- Video 3 -->
-            <div class="slider-item">
-              <div class="video-wrapper cultureSliderVideo"
-                data-video-url="https://www.youtube.com/embed/Uc7LJFEytN0?autoplay=1&mute=0&rel=0&showinfo=0">
-                <img class="video-thumbnail" src="https://img.youtube.com/vi/Uc7LJFEytN0/maxresdefault.jpg"
-                  alt="Culture video thumbnail" />
-                <div class="video-thumbnail-overlay"></div>
-                <div class="video-play-btn">
-                  <svg viewBox="0 0 24 24">
-                    <polygon points="8,5 19,12 8,19" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- Video 4 -->
-            <div class="slider-item">
-              <div class="video-wrapper cultureSliderVideo"
-                data-video-url="https://www.youtube.com/embed/1lCAXmoegR4?autoplay=1&mute=0&rel=0&showinfo=0">
-                <img class="video-thumbnail" src="https://img.youtube.com/vi/1lCAXmoegR4/maxresdefault.jpg"
-                  alt="Culture video thumbnail" />
-                <div class="video-thumbnail-overlay"></div>
-                <div class="video-play-btn">
-                  <svg viewBox="0 0 24 24">
-                    <polygon points="8,5 19,12 8,19" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- Video 5 -->
-            <div class="slider-item">
-              <div class="video-wrapper cultureSliderVideo"
-                data-video-url="https://www.youtube.com/embed/_K7PEQtlJGk?autoplay=1&mute=0&rel=0&showinfo=0">
-                <img class="video-thumbnail" src="https://img.youtube.com/vi/_K7PEQtlJGk/maxresdefault.jpg"
-                  alt="Culture video thumbnail" />
-                <div class="video-thumbnail-overlay"></div>
-                <div class="video-play-btn">
-                  <svg viewBox="0 0 24 24">
-                    <polygon points="8,5 19,12 8,19" />
-                  </svg>
-                </div>
-              </div>
-            </div>
+          <div class="video-iframe-container">
+            <iframe id="cultureVideoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
+        </div>
+        <div class="culture-gallery">
+          <h3 class="culture-gallery-header">Hear from more of the Brightspeed team</h3>
+          <div class="slider-container">
+            <div class="slider-arrow slider-prev">
+              <svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </div>
 
-          <div class="slider-arrow slider-next">
-            <svg viewBox="0 0 24 24">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
+            <div class="slider-track" id="videoSliderTrack">
+              <!-- Video 1 -->
+              <div class="slider-item">
+                <div class="video-wrapper cultureSliderVideo"
+                  data-video-url="https://www.youtube.com/embed/vHyYdDdt-YM?autoplay=1&mute=0&rel=0&showinfo=0">
+                  <img class="video-thumbnail" src="https://img.youtube.com/vi/vHyYdDdt-YM/maxresdefault.jpg"
+                    alt="Culture video thumbnail" />
+                  <div class="video-thumbnail-overlay"></div>
+                  <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24">
+                      <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video 2 -->
+              <div class="slider-item">
+                <div class="video-wrapper cultureSliderVideo"
+                  data-video-url="https://www.youtube.com/embed/0JWL67ha2hs?autoplay=1&mute=0&rel=0&showinfo=0">
+                  <img class="video-thumbnail" src="https://img.youtube.com/vi/0JWL67ha2hs/maxresdefault.jpg"
+                    alt="Culture video thumbnail" />
+                  <div class="video-thumbnail-overlay"></div>
+                  <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24">
+                      <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video 3 (New: Crystal) -->
+              <div class="slider-item">
+                <div class="video-wrapper cultureSliderVideo"
+                  data-video-url="https://www.youtube.com/embed/ItR-O6ivppI?autoplay=1&mute=0&rel=0&showinfo=0">
+                  <img class="video-thumbnail" src="https://img.youtube.com/vi/ItR-O6ivppI/maxresdefault.jpg"
+                    alt="Culture video thumbnail" />
+                  <div class="video-thumbnail-overlay"></div>
+                  <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24">
+                      <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video 4 -->
+              <div class="slider-item">
+                <div class="video-wrapper cultureSliderVideo"
+                  data-video-url="https://www.youtube.com/embed/Uc7LJFEytN0?autoplay=1&mute=0&rel=0&showinfo=0">
+                  <img class="video-thumbnail" src="https://img.youtube.com/vi/Uc7LJFEytN0/maxresdefault.jpg"
+                    alt="Culture video thumbnail" />
+                  <div class="video-thumbnail-overlay"></div>
+                  <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24">
+                      <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video 5 -->
+              <div class="slider-item">
+                <div class="video-wrapper cultureSliderVideo"
+                  data-video-url="https://www.youtube.com/embed/1lCAXmoegR4?autoplay=1&mute=0&rel=0&showinfo=0">
+                  <img class="video-thumbnail" src="https://img.youtube.com/vi/1lCAXmoegR4/maxresdefault.jpg"
+                    alt="Culture video thumbnail" />
+                  <div class="video-thumbnail-overlay"></div>
+                  <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24">
+                      <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video 6 -->
+              <div class="slider-item">
+                <div class="video-wrapper cultureSliderVideo"
+                  data-video-url="https://www.youtube.com/embed/_K7PEQtlJGk?autoplay=1&mute=0&rel=0&showinfo=0">
+                  <img class="video-thumbnail" src="https://img.youtube.com/vi/_K7PEQtlJGk/maxresdefault.jpg"
+                    alt="Culture video thumbnail" />
+                  <div class="video-thumbnail-overlay"></div>
+                  <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24">
+                      <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="slider-arrow slider-next">
+              <svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== PLACEMAT ===== -->
-  <section class="placemat">
-    <div class="placemat-inner reveal">
-      <div class="placemat-eyebrow">Quick Reference</div>
-      <h2>Meet the team behind the strategy.</h2>
-      <p>Download a one-page guide that introduces the Level team supporting Brightspeed and outlines the core elements
-        of our proposed growth strategy.</p>
-      <p>Think of it as a quick reference to who's involved and how we'll work together.</p>
-      <div class="placemat-preview">
-        <svg class="placemat-preview-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
-          <line x1="16" y1="13" x2="8" y2="13" />
-          <line x1="16" y1="17" x2="8" y2="17" />
-          <polyline points="10 9 9 9 8 9" />
-        </svg>
-        <div class="placemat-preview-lines">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+    <!-- ===== PLACEMAT ===== -->
+    <section class="placemat">
+      <div class="placemat-inner reveal">
+        <div class="placemat-eyebrow">Quick Reference</div>
+        <h2>Meet the team behind the strategy.</h2>
+        <p>Download a one-page guide that introduces the Level team supporting Brightspeed and outlines the core
+          elements
+          of our proposed growth strategy.</p>
+        <p>Think of it as a quick reference to who's involved and how we'll work together.</p>
+        <div class="placemat-preview">
+          <img src="brightspeed-mat-image.jpg" alt="Brightspeed team placemat" loading="lazy">
+        </div>
+        <a href="https://info.level.agency/hubfs/Blog%20assets/LEVEL_Brightspeed_Placemat.pdf" target="_blank"
+          class="cta-btn accent">Download the team overview</a>
+      </div>
+    </section>
+
+    <!-- ===== TOPICS ===== -->
+    <section class="topics">
+      <div class="topics-inner">
+        <div class="topics-label reveal">What we explored</div>
+        <div class="topics-grid">
+          <div class="topic-card reveal">
+            <div class="topic-icon blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+              </svg>
+            </div>
+            <h3>Full-funnel targeting with precision</h3>
+            <p>Using audience intelligence and intent signals, Brightspeed and Level can precisely target prospects
+              across
+              the full funnel, building awareness, capturing demand, and driving conversion more efficiently.
+            </p>
+          </div>
+          <div class="topic-card reveal">
+            <div class="topic-icon pink">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+                <path d="M22 12A10 10 0 0 0 12 2v10z" />
+              </svg>
+            </div>
+            <h3>A path to media mix modeling</h3>
+            <p>A practical roadmap for evolving measurement, from platform reporting toward media mix modeling, so
+              Brightspeed can better understand channel impact and make smarter investment decisions.</p>
+          </div>
+          <div class="topic-card reveal">
+            <div class="topic-icon green">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3>A true extension of your team</h3>
+            <p>Level works as an embedded partner, bringing strategy, creative, media, and experimentation together with
+              a
+              collaborative, transparent approach focused on shared outcomes.</p>
+          </div>
         </div>
       </div>
-      <a href="#" class="cta-btn accent">Download the team placemat</a>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== TOPICS ===== -->
-  <section class="topics">
-    <div class="topics-inner">
-      <div class="topics-label reveal">What we explored</div>
-      <div class="topics-grid">
-        <div class="topic-card reveal">
-          <div class="topic-icon blue">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    <!-- ===== UPCOMING EVENTS ===== -->
+    <section class="events">
+      <div class="events-inner">
+        <div class="events-label reveal">Level Events of Note</div>
+        <div class="events-grid">
+          <a href="https://info.level.agency/ai-visibility-insider-session" target="_blank" class="event-card reveal">
+            <svg class="event-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="12" cy="12" r="6" />
-              <circle cx="12" cy="12" r="2" />
+              <line x1="7" y1="7" x2="17" y2="17"></line>
+              <polyline points="17 7 17 17 7 17"></polyline>
             </svg>
+            <div class="event-date">Watch on Demand</div>
+            <h3 class="event-title">AI Visibility Virtual Insider Session with Profound AI</h3>
+            <p class="event-desc">Actionable tactics you can use immediately to boost your brand’s visibility across
+              AI-driven search and answer engines</p>
+          </a>
+
+          <a href="https://info.level.agency/reddit-marketing-leaders-ai-visibility-session" target="_blank"
+            class="event-card reveal">
+            <svg class="event-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="7" x2="17" y2="17"></line>
+              <polyline points="17 7 17 17 7 17"></polyline>
+            </svg>
+            <div class="event-date">March 19, 2026, 1 PM ET</div>
+            <h3 class="event-title">Reddit for marketing leaders</h3>
+            <p class="event-desc">Spend 30 minutes with leaders from Reddit talking about how brands can best engage
+              with
+              the platform</p>
+          </a>
+
+          <a href="https://level-executive-summit.vercel.app/" target="_blank" class="event-card reveal">
+            <svg class="event-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="7" x2="17" y2="17"></line>
+              <polyline points="17 7 17 17 7 17"></polyline>
+            </svg>
+            <div class="event-date">April 8-10, 2026 &bull; Pittsburgh, PA</div>
+            <h3 class="event-title">Level Agency Executive Summit 2026</h3>
+            <p class="event-desc">A working, high-trust gathering of industry leaders</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery">
+      <div class="gallery-inner">
+        <div class="gallery-label reveal">Thought we'd share a little behind the scenes fun</div>
+        <div class="gallery-grid reveal">
+          <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="/team-hero.jpg" alt="Level team in a Charlotte park" loading="lazy">
           </div>
-          <h3>Full-funnel targeting with precision</h3>
-          <p>Using audience intelligence and intent signals, Brightspeed and Level can precisely target prospects across
-            the full funnel, building awareness, capturing demand, and driving conversion more efficiently.
+          <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="/banner.jpg" alt="Charlotte street banner" loading="lazy">
+          </div>
+
+          <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="working.jpg" alt="Team at work" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="working-2.jpg" alt="Team at work" loading="lazy">
+          </div>
+          <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="dinner.jpg" alt="Team at work" loading="lazy">
+          </div>
+
+          <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="working-3.jpg" alt="Team at work" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT LEVEL ===== -->
+    <section class="about">
+      <div class="about-inner">
+        <div class="about-left reveal">
+          <h2>Good enough isn't.</h2>
+          <p>
+            Level is an embedded growth partner for brands in complex, high-consideration markets.
+            We combine AI-enhanced strategy, creative, and media into one performance system, built to
+            sustain momentum, not just spike it.
+          </p>
+          <p>
+            Headquartered in Pittsburgh with 250+ people across North America, we partner with
+            teams that expect more from their marketing and from the people behind it.
           </p>
         </div>
-        <div class="topic-card reveal">
-          <div class="topic-icon pink">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
-              <path d="M22 12A10 10 0 0 0 12 2v10z" />
-            </svg>
+        <div class="about-right reveal">
+          <div class="about-stat">
+            <div class="about-stat-number">250+</div>
+            <div class="about-stat-label">People across North America</div>
           </div>
-          <h3>A path to media mix modeling</h3>
-          <p>A practical roadmap for evolving measurement, from platform reporting toward media mix modeling, so
-            Brightspeed can better understand channel impact and make smarter investment decisions.</p>
-        </div>
-        <div class="topic-card reveal">
-          <div class="topic-icon green">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
+          <div class="about-stat">
+            <div class="about-stat-number">$300M+</div>
+            <div class="about-stat-label">Ad spend managed</div>
           </div>
-          <h3>A true extension of your team</h3>
-          <p>Level works as an embedded partner, bringing strategy, creative, media, and experimentation together with a
-            collaborative, transparent approach focused on shared outcomes.</p>
+          <div class="about-stat">
+            <div class="about-stat-number">100+</div>
+            <div class="about-stat-label">Clients across various industries</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== UPCOMING EVENTS ===== -->
-  <section class="events">
-    <div class="events-inner">
-      <div class="events-label reveal">Level Events of Note</div>
-      <div class="events-grid">
-        <a href="https://info.level.agency/ai-visibility-insider-session" target="_blank" class="event-card reveal">
-          <svg class="event-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="7" x2="17" y2="17"></line>
-            <polyline points="17 7 17 17 7 17"></polyline>
-          </svg>
-          <div class="event-date">Watch on Demand</div>
-          <h3 class="event-title">AI Visibility Virtual Insider Session with Profound AI</h3>
-          <p class="event-desc">Actionable tactics you can use immediately to boost your brand’s visibility across
-            AI-driven search and answer engines</p>
-        </a>
-
-        <a href="https://info.level.agency/reddit-marketing-leaders-ai-visibility-session" target="_blank"
-          class="event-card reveal">
-          <svg class="event-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="7" x2="17" y2="17"></line>
-            <polyline points="17 7 17 17 7 17"></polyline>
-          </svg>
-          <div class="event-date">March 19, 2026, 1 PM ET</div>
-          <h3 class="event-title">Reddit for marketing leaders</h3>
-          <p class="event-desc">Spend 30 minutes with leaders from Reddit talking about how brands can best engage with
-            the platform</p>
-        </a>
-
-        <a href="https://level-executive-summit.vercel.app/" target="_blank" class="event-card reveal">
-          <svg class="event-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="7" x2="17" y2="17"></line>
-            <polyline points="17 7 17 17 7 17"></polyline>
-          </svg>
-          <div class="event-date">April 8-10, 2026 &bull; Pittsburgh, PA</div>
-          <h3 class="event-title">Level Agency Executive Summit 2026</h3>
-          <p class="event-desc">A working, high-trust gathering of industry leaders</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== GALLERY ===== -->
-  <section class="gallery">
-    <div class="gallery-inner">
-      <div class="gallery-label reveal">Thought we'd share a little behind the scenes fun</div>
-      <div class="gallery-grid reveal">
-        <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="/team-hero.jpg" alt="Level team in a Charlotte park" loading="lazy">
-        </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="/banner.jpg" alt="Charlotte street banner" loading="lazy">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="working.jpg" alt="Team at work" loading="lazy">
-        </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="working-2.jpg" alt="Team at work" loading="lazy">
-        </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="dinner.jpg" alt="Team at work" loading="lazy">
-        </div>
-
-        <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="working-3.jpg" alt="Team at work" loading="lazy">
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT LEVEL ===== -->
-  <section class="about">
-    <div class="about-inner">
-      <div class="about-left reveal">
-        <h2>Good enough isn't.</h2>
-        <p>
-          Level is an embedded growth partner for brands in complex, high-consideration markets.
-          We combine AI-enhanced strategy, creative, and media into one performance system, built to
-          sustain momentum, not just spike it.
-        </p>
-        <p>
-          Headquartered in Pittsburgh with 250+ people across North America, we partner with
-          teams that expect more from their marketing and from the people behind it.
-        </p>
-      </div>
-      <div class="about-right reveal">
-        <div class="about-stat">
-          <div class="about-stat-number">250+</div>
-          <div class="about-stat-label">People across North America</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-number">$300M+</div>
-          <div class="about-stat-label">Ad spend managed</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-number">100+</div>
-          <div class="about-stat-label">Clients across various industries</div>
+    <!-- ===== CAPABILITIES ===== -->
+    <section class="capabilities">
+      <div class="capabilities-inner reveal">
+        <div class="capabilities-label">What we do</div>
+        <div class="capabilities-list">
+          <span class="cap-tag">Performance Media</span>
+          <span class="cap-tag">AI SEO</span>
+          <span class="cap-tag">Creative & Content</span>
+          <span class="cap-tag">Data Science & Analytics</span>
+          <span class="cap-tag">Marketing Automation</span>
+          <span class="cap-tag">Strategy & Consulting</span>
+          <span class="cap-tag">CRM & Loyalty</span>
+          <span class="cap-tag">Website Development</span>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CAPABILITIES ===== -->
-  <section class="capabilities">
-    <div class="capabilities-inner reveal">
-      <div class="capabilities-label">What we do</div>
-      <div class="capabilities-list">
-        <span class="cap-tag">Performance Media</span>
-        <span class="cap-tag">AI SEO</span>
-        <span class="cap-tag">Creative & Content</span>
-        <span class="cap-tag">Data Science & Analytics</span>
-        <span class="cap-tag">Marketing Automation</span>
-        <span class="cap-tag">Strategy & Consulting</span>
-        <span class="cap-tag">CRM & Loyalty</span>
-        <span class="cap-tag">Website Development</span>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="footer-logo">
+        <svg viewBox="0 0 1088.59 200.05" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#FFFFFF"
+            d="M910.08,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM699.41,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM479.93,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h124.56c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-124.56ZM216.92,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM699.41,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM469.39,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h145.65c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-145.65ZM216.92,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM459.3,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h165.81c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-165.81ZM216.92,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM8.54,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h131.13c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-131.13ZM556.65,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM449.31,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM216.92,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h131.13c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-131.13ZM8.54,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM216.92,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM8.54,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM566.86,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM439.09,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM910.08,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM576.8,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM429.15,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM8.54,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM699.41,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM216.92,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM910.08,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM587.15,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM418.8,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM216.92,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,17.08C3.83,17.08,0,13.25,0,8.54S3.83,0,8.54,0h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54Z" />
+        </svg>
       </div>
+      <div class="footer-tagline">Good enough isn't.</div>
+      <div class="footer-links">
+        <a href="https://level.agency" target="_blank" rel="noopener">level.agency</a>
+        <a href="https://www.linkedin.com/company/levelagency/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Level Agency. All rights reserved.</div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+      <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+      <img id="lightbox-img" src="" alt="">
+      <iframe id="lightbox-video" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-  </section>
 
-
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="footer-logo">
-      <svg viewBox="0 0 1088.59 200.05" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#FFFFFF"
-          d="M910.08,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM699.41,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM479.93,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h124.56c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-124.56ZM216.92,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,200.05c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM699.41,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM469.39,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h145.65c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-145.65ZM216.92,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,169.56c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM459.3,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h165.81c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-165.81ZM216.92,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM8.54,139.06c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h131.13c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-131.13ZM556.65,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM449.31,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM216.92,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h131.13c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-131.13ZM8.54,108.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM910.08,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM216.92,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM8.54,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM566.86,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM439.09,78.07c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM910.08,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM576.8,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM429.15,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM8.54,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54ZM699.41,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM216.92,47.57c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM910.08,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-89.95ZM699.41,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM587.15,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM418.8,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h78.47c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-78.47ZM216.92,17.08c-4.71,0-8.54-3.83-8.54-8.54s3.83-8.54,8.54-8.54h169.97c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54h-169.97ZM8.54,17.08C3.83,17.08,0,13.25,0,8.54S3.83,0,8.54,0h89.95c4.71,0,8.54,3.83,8.54,8.54s-3.83,8.54-8.54,8.54H8.54Z" />
-      </svg>
-    </div>
-    <div class="footer-tagline">Good enough isn't.</div>
-    <div class="footer-links">
-      <a href="https://level.agency" target="_blank" rel="noopener">level.agency</a>
-      <a href="https://www.linkedin.com/company/levelagency/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-    <div class="footer-copy">&copy; 2026 Level Agency. All rights reserved.</div>
-  </footer>
-
-  <!-- Lightbox -->
-  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
-    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
-    <img id="lightbox-img" src="" alt="">
-    <iframe id="lightbox-video" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
+    // Authentication Logic
+    (function () {
+      const overlay = document.getElementById('login-overlay');
+      const wrapper = document.getElementById('site-wrapper');
+      const form = document.getElementById('login-form');
+      const error = document.getElementById('login-error');
+
+      const PASSWORD = 'levelbright2026';
+
+      function showSite() {
+        overlay.style.display = 'none';
+        wrapper.style.display = 'block';
+        // Re-trigger scroll reveals
+        window.dispatchEvent(new Event('resize'));
+        document.body.style.overflow = 'auto';
+      }
+
+      // Check if already authenticated
+      if (sessionStorage.getItem('level_authenticated') === 'true') {
+        showSite();
+      } else {
+        document.body.style.overflow = 'hidden';
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const p = document.getElementById('password').value;
+
+        if (p === PASSWORD) {
+          sessionStorage.setItem('level_authenticated', 'true');
+          showSite();
+        } else {
+          error.style.display = 'block';
+          form.style.animation = 'none';
+          form.offsetHeight; // trigger reflow
+          form.style.animation = 'shake 0.4s ease';
+        }
+      });
+    })();
+
     // QR Code generation
     document.addEventListener('DOMContentLoaded', function () {
       // QR Code generation
